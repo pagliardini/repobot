@@ -25,6 +25,13 @@
         <button type="submit">Top 10 Productos</button>
     </form>
 
+    <form method="POST">
+        <input type="hidden" name="no_movement_products" value="true">
+        <label for="days_no_movement">Días sin Movimiento:</label>
+        <input type="number" id="days_no_movement" name="days_no_movement" required><br>
+        <button type="submit">Productos sin Movimiento</button>
+    </form>
+
     {% if total_vendido is not none %}
         <h2>Total Vendido: {{ total_vendido }}</h2>
     {% elif top_products is not none %}
@@ -32,6 +39,13 @@
         <ul>
             {% for product in top_products.itertuples() %}
                 <li>{{ product.Descripcion }}: {{ product.Total_Vendido }}</li>
+            {% endfor %}
+        </ul>
+    {% elif no_movement_products is not none %}
+        <h2>Productos sin Movimiento:</h2>
+        <ul>
+            {% for product in no_movement_products.itertuples() %}
+                <li>{{ product.Descripcion }}</li>
             {% endfor %}
         </ul>
     {% elif error %}
